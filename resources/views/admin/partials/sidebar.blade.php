@@ -26,6 +26,7 @@
       <li><a href="{{route('services')}}"><i class="fa fa-bars text-aqua"></i> <span>Services</span></a></li>
 
       <li><a href="{{route('projects')}}"><i class="fa fa-bars text-aqua"></i> <span>Projects</span></a></li>
+      <li><a href="{{route('resources')}}"><i class="fa fa-bars text-aqua"></i> <span>Resources</span></a></li>
 
       <li><a href="{{route('aboutus')}}"><i class="fa fa-bars text-aqua"></i> <span>About Us</span></a></li>
 

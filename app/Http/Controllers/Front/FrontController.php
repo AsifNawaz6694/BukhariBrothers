@@ -14,6 +14,7 @@ use App\User;
 use App\Service;
 use App\Project;
 use App\Contact;
+use App\Resource;
 use App\About;
 class FrontController extends Controller
 {
@@ -37,6 +38,7 @@ class FrontController extends Controller
         $args['users'] = User::leftJoin('profiles','profiles.user_id','=','users.id')->get();           
         $args['services'] = Service::get();            
         $args['projects'] = Project::get();            
+        $args['resources'] = Resource::get();            
         $args['about'] = About::first();            
         return view('front.index')->with($args);
     }

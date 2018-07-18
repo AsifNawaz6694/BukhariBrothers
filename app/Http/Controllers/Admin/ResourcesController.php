@@ -1,35 +1,34 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use DB;
 use Auth;
-use App\Project;
-use App\Category;
+use App\Resource;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Session;
-class ProjectsController extends Controller
+
+class ResourcesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+    */
     public function index()
     {
-        $args['projects'] = Project::all();
-        return view('admin.projects.index')->with($args);
+        $args['resources'] = Resource::all();
+        return view('admin.resource.index')->with($args);
     }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \    Illuminate\Http\Response
-     */
+    */
     public function create()
     {        
-        return view('admin.projects.create');     
+        return view('admin.resource.create');     
     }
 
     /**
@@ -41,44 +40,42 @@ class ProjectsController extends Controller
     public function store(Request $request)
      {
        try{
-            $p = new Project;
+            $p = new Resource;
             $p->title = $request->title;
             $p->description = $request->description;
             if ($request->hasFile('image')) {
               $image=$request->file('image');
               $filename=time() . '.' . $image->getClientOriginalExtension();
-              $location=public_path('public/storage/project-images/'.$filename);
+              $location=public_path('public/storage/resources-images/'.$filename);
               $p->image=$filename;
               $p->image = $this->UploadImage('image', Input::file('image'));
             }
             if ($p->save()) {
-                $this->set_session('Project Successfully Added.', true);
-                return redirect()->route('projects');
+                $this->set_session('Resource Successfully Added.', true);
+                return redirect()->route('resources');
             }else{
-                $this->set_session('Project Could Not Be Added.', false);
-                return redirect()->route('projects');
+                $this->set_session('Resource Could Not Be Added.', false);
+                return redirect()->route('resources');
             }
 
         }catch(\Exception $e){
-            $this->set_session('Something Went Wrong Please Try Again '.$e->getMessage(), false);
-            return redirect()->route('projects'); 
+            $this->set_session('Something Went Wrong Please Try Again.'.$e->getMessage(),false);
+            return redirect()->route('resources');
         }
     }
 
-    public function ImageUploadProject(Request $request){
-
+    public function ImageUploadResource(Request $request){
         $img_name = '';
         if(Input::file('image')){
         $img_name = $this->UploadImage('image', Input::file('image'));
-
-        Project::where('projects.id' ,'=', $request->project_id)->update([
+        Resource::where('resources.id' ,'=', $request->resource_id)->update([
         'image' => $img_name
-        ]);  
-        $path = asset('public/storage/project-images/').'/'.$img_name; 
-        return \Response()->json(['success' => "Image update successfully", 'code' => 200, 'img' => $path]); 
-        $this->set_session('Image Uploaded successfully', true); 
-        }else{      
-            $this->set_session('Image is Not Uploaded. Please Try Again', false); 
+        ]);
+        $path = asset('public/storage/resources-images/').'/'.$img_name;
+        return \Response()->json(['success' => "Image update successfully", 'code' => 200, 'img' => $path]);
+        $this->set_session('Image Uploaded successfully', true);
+        }else{
+            $this->set_session('Image is Not Uploaded. Please Try Again', false);
         return \Response()->json(['error' => "Image uploading failed", 'code' => 202]);
         }
     }
@@ -90,15 +87,15 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function project_view($id)
+    public function resource_view($id)
     {
-        $project = Project::find($id);
-        if($project){          
-            return view('admin.projects.view', compact('project'));
+        $resource = Resource::find($id);
+        if($resource){
+            return view('admin.resource.view', compact('resource'));
         }
         else{
-           $this->set_session('Project Not Found.', false);
-            return redirect()->route('products');
+            $this->set_session('Resource Not Found.', false);
+            return redirect()->route('resources');
         }
     }
 
@@ -109,14 +106,12 @@ class ProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        
-        $p = Project::find($id);        
+    {       
+        $p = Resource::find($id);        
         if($p != null){
-            $args['project'] = $p;
-            return view('admin.projects.edit')->with($args);
+            $args['resource'] = $p;
+            return view('admin.resource.edit')->with($args);
         }
-
         return abort(404);
     }
 
@@ -130,33 +125,33 @@ class ProjectsController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            $p =  Project::find($id);
+            $p =  Resource::find($id);
             $p->title = $request->title;
             $p->description = $request->description;  
             if ($request->hasFile('image')) {
               $image=$request->file('image');
               $filename=time() . '.' . $image->getClientOriginalExtension();
-              $location=public_path('public/storage/project-images/'.$filename);
+              $location=public_path('public/storage/resources-images/'.$filename);
               $p->image=$filename;
               $p->image = $this->UploadImage('image', Input::file('image'));
             }         
             if ($p->save()) {
-            $this->set_session('Project Successfully Updated.', true);
-            return redirect()->route('projects');
+            $this->set_session('Resource Successfully Updated.', true);
+            return redirect()->route('resources');
             }else{
-                $this->set_session('Project Could Not be Updated.', false);
-            return redirect()->route('projects');
+                $this->set_session('Resource Could Not be Updated.', false);
+            return redirect()->route('resources');
             }
 
         }catch(\Exception $e){
             $this->set_session('Something Went Wrong Please Try Again '.$e->getMessage(), false);
-            return redirect()->route('projects'); 
+            return redirect()->route('resources'); 
         }
     }
 
     public function UploadImage($type, $file){
         if( $type == 'image'){
-        $path = 'public/storage/project-images/';
+        $path = 'public/storage/resources-images/';
         }
         $filename = md5($file->getClientOriginalName() . time()) . '.' . $file->getClientOriginalExtension();
         $file->move( $path , $filename);
@@ -169,9 +164,9 @@ class ProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function remove_picture_project($id){
+    public function remove_picture_resource($id){
         // dd('12334');
-        DB::table('projects')
+        DB::table('resources')
             ->where('id',$id)
             ->update(['image' => '']);
         return redirect()->back();
@@ -180,18 +175,18 @@ class ProjectsController extends Controller
     public function destroy($id)
     {
         try{
-            $p =  Project::find($id);                      
+            $p =  Product::find($id);                      
             if ($p->delete()) {
-            $this->set_session('Project Successfully Deleted.', true);
-            return redirect()->route('projects');
+            $this->set_session('Product Successfully Deleted.', true);
+            return redirect()->route('products');
             }else{
-                $this->set_session('Project Could Not be Deleted.', false);
-            return redirect()->route('projects');
+                $this->set_session('Product Could Not be Deleted.', false);
+            return redirect()->route('products');
             }
 
         }catch(\Exception $e){
             $this->set_session('Something Went Wrong Please Try Again.'.$e->getMessage(), false);
-            return redirect()->route('projects'); 
+            return redirect()->route('products'); 
         }
     }
 

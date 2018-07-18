@@ -59,10 +59,10 @@
                            <li><a data-scroll href="#body">Home</a></li>
                            <li><a data-scroll href="#about">About Us</a></li>
                            <li><a data-scroll href="#services">Services</a></li>
-                           <li><a data-scroll href="#portfolio">Resources</a></li>
+                           <li><a data-scroll href="#resources">Resources</a></li>
                            <li><a data-scroll href="#our-team">Team</a></li>
-                           <li><a data-scroll href="#pricing">Carrier</a></li>
-                           <li><a data-scroll href="#blog">Projects</a></li>
+                           <li><a data-scroll href="#careers">Careers</a></li>
+                           <li><a data-scroll href="#projects">Projects</a></li>
                            <li><a data-scroll href="#contact-us">Contact</a></li>
                         </ul>
                      </nav>

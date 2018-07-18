@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin' ,  'middleware' => 'is-admin'], function () {
 	Route::get('/reject_order/{id}/', ["as" => "reject-order", "uses" => "Admin\OrdersController@reject_order"]);
 //Orders Routes Ended
 
-//Products CRUD Routes Started
+//Projects CRUD Routes Started
 	Route::get('/project','Admin\ProjectsController@index')->name('projects');
 	Route::post('project/store', 'Admin\ProjectsController@store')->name('store_project');
 	Route::get('project/create', 'Admin\ProjectsController@create')->name('create_project');
@@ -46,7 +46,19 @@ Route::group(['prefix' => 'admin' ,  'middleware' => 'is-admin'], function () {
 	Route::post('update_project/{id}',['as'=>'update_project','uses'=>'Admin\ProjectsController@update']);
 	Route::get('/remove_picture_project/{project_id}','Admin\ProjectsController@remove_picture_project')->name('remove_picture_project');
 	Route::post('ImageUploadProject',['as'=>'ImageUploadProject','uses'=>'Admin\ProjectsController@ImageUploadProject']);
-//Products CRUD Routes Ended
+//Projects CRUD Routes Ended
+
+//Resources CRUD Routes Started
+	Route::get('/resource','Admin\ResourcesController@index')->name('resources');
+	Route::post('resource/store', 'Admin\ResourcesController@store')->name('store_resource');
+	Route::get('resource/create', 'Admin\ResourcesController@create')->name('create_resource');
+	Route::get('resource/delete/{id}', 'Admin\ResourcesController@destroy')->name('delete_resource');
+	Route::get('resource/{id}', 'Admin\ResourcesController@resource_view')->name('resource_view');
+	Route::get('resource/{id}/edit', 'Admin\ResourcesController@edit')->name('resource_edit');
+	Route::post('update_resource/{id}',['as'=>'update_resource','uses'=>'Admin\ResourcesController@update']);
+	Route::get('/remove_picture_resource/{resource_id}','Admin\ResourcesController@remove_picture_resource')->name('remove_picture_resource');
+	Route::post('ImageUploadResource',['as'=>'ImageUploadResource','uses'=>'Admin\ResourcesController@ImageUploadResource']);
+//Resources CRUD Routes Ended
 
 //Services CRUD Routes Started
 	Route::get('/services','Admin\ServiceController@index')->name('services');
