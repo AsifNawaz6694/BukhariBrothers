@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/', 'Front\FrontController@dashboard')->name('dashboard');
 Route::get('/login', 'AuthenticationController@login_index')->name('login_index');
 Route::post('/login_post', 'AuthenticationController@login_post')->name('login_post');
+Route::post('/contact_post', 'Front\FrontController@contact_form')->name('contact_post');
 
 /*Admin Routes Started*/
 Route::group(['prefix' => 'admin' ,  'middleware' => 'is-admin'], function () {
@@ -82,5 +83,17 @@ Route::group(['prefix' => 'admin' ,  'middleware' => 'is-admin'], function () {
 	//Admin Removing ProfilePicture
 	Route::get('/remove_picture_admin/{user_id}','Admin\AdminController@remove_picture_admin')->name('remove_picture_admin');
 	//Admin Removing ProfilePicture	
+
+	//About Us Routes Started
+	Route::get('/aboutus','Admin\PagesController@index')->name('aboutus');
+	Route::get('about/{id}/edit', 'Admin\PagesController@edit')->name('about_edit');
+	Route::post('update_about/{id}',['as'=>'update_about','uses'=>'Admin\PagesController@update']);
+	//About Us Routes Ended
+
+	//Contact us Routes Started
+	Route::get('/contact_emails','Admin\PagesController@contacts')->name('contacts');
+	Route::get('reply_email/{id}/edit', 'Admin\PagesController@reply_email')->name('reply_email');
+	Route::post('reply_email_post/{id}',['as'=>'reply_email_post','uses'=>'Admin\PagesController@reply_email_post']);
+	//Contact us Routes Ended
 });
 /*Admin Routes Ended*/

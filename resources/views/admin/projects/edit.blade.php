@@ -31,7 +31,7 @@
                                     <div class="col-sm-10">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <input type="file" name="icon" class="filePath " data-class="img1">
+                                                <input type="file" name="image" class="filePath " data-class="img1">
                                             </div>
                                             <div class="col-sm-6">
                                                 <a href="" class="img1" download>
@@ -44,7 +44,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="form-group">
+                                {{--  <div class="form-group">
                                     <label for="inputCountry" class="col-sm-2 control-label">Project Video</label>
                                     <div class="col-sm-10">
                                         <div class="row">
@@ -61,7 +61,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button type="submit" class="btn btn-danger">Update</button>

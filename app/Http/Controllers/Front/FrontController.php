@@ -10,6 +10,11 @@ use Auth;
 use Session;
 use Mail;
 use View;
+use App\User;
+use App\Service;
+use App\Project;
+use App\Contact;
+use App\About;
 class FrontController extends Controller
 {
     /**
@@ -28,8 +33,12 @@ class FrontController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function dashboard()
-    {              
-        return view('front.index');
+    {  
+        $args['users'] = User::leftJoin('profiles','profiles.user_id','=','users.id')->get();           
+        $args['services'] = Service::get();            
+        $args['projects'] = Project::get();            
+        $args['about'] = About::first();            
+        return view('front.index')->with($args);
     }
 
     public function contact_form(Request $request)
@@ -42,22 +51,31 @@ class FrontController extends Controller
             if (isset($request->email)) {
             $data['email'] = $request->email;
             }
-            if (isset($request->subject)) {
-            $data['subject'] = $request->subject;
+            if (isset($request->contact_subject)) {
+            $data['contact_subject'] = $request->contact_subject;
             }
-            if (isset($request->message)) {
-            $data['message'] = $request->message;
+            if (isset($request->contact_message)) {
+            $data['contact_message'] = $request->contact_message;
             }      
           Mail::send('emails.info_email',['data'=>$data] , function ($message) use($data){
-              $message->from($data['email'], 'Contact Us Email - KEBABBQ');
-              $message->to(env('MAIL_USERNAME'))->subject('KEBABBQ - Contact Us Email');
-            });         
-          return \Response()->Json([ 'status' => 200,'msg'=>'Thank you for your valuable time. we will get back to you as soon as possible.']);
+              $message->from($data['email'], 'Contact Us Email - BukhariBrothers');
+              $message->to(env('MAIL_USERNAME'))->subject('BukhariBrothers - Contact Us Email');
+            });  
+            $store = new Contact;
+            $store->name = $request->name;       
+            $store->email = $request->email;       
+            $store->contact_message = $request->contact_message;       
+            $store->contact_subject = $request->contact_subject;       
+            $store->save();
+            $this->set_session('Thank You For Your Valuable Time, We will be right back to you soon', true);
+            return redirect()->back();
          }else{
-           return \Response()->Json([ 'status' => 202, 'msg'=>'Something Went Wrong, Please Try Again!']);
+            $this->set_session('Something Went Wrong Please Try Again Later', false);
+            return redirect()->back();
          }  
       } catch (QueryException $e) {
-        return \Response()->Json([ 'array' => $e]);
+        $this->set_session('Something Went Wrong Please Try Again Later', false);
+        return redirect()->back();
       }       
     }        
     

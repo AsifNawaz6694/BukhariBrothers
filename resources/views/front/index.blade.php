@@ -37,6 +37,8 @@
                <!-- Main Stylesheet -->
                <link rel="stylesheet" href="{{ asset('public/frontend_assets/css/style.css') }}">
             </head>
+            
+                @include('general_partials.error_section')
             <body id="body" data-spy="scroll" data-target=".navbar" data-offset="50">
                <!--
            
@@ -62,7 +64,7 @@
                         </div>
                         <!-- /section title -->
                         <!-- About item -->
-                        <div class="col-md-4 text-center wow fadeInUp" data-wow-duration="500ms" >
+                        {{-- <div class="col-md-4 text-center wow fadeInUp" data-wow-duration="500ms" >
                            <div class="block">
                               <div class="icon-box">
                                  <i class="tf-tools"></i>
@@ -73,10 +75,10 @@
                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, nihil, libero, perspiciatis eos provident laborum eum dignissimos</p>
                               </div>
                            </div>
-                        </div>
+                        </div> --}}
                         <!-- End About item -->
                         <!-- About item -->
-                        <div class="col-md-4 text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="250ms">
+                        {{-- <div class="col-md-4 text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="250ms">
                            <div class="block">
                               <div class="icon-box">
                                  <i class="tf-strategy"></i>
@@ -87,10 +89,10 @@
                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, nihil, libero, perspiciatis eos provident laborum eum dignissimos</p>
                               </div>
                            </div>
-                        </div>
+                        </div> --}}
                         <!-- End About item -->
                         <!-- About item -->					
-                        <div class="col-md-4 text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms">
+                        {{-- <div class="col-md-4 text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms">
                            <div class="block kill-margin-bottom">
                               <div class="icon-box">
                                  <i class="tf-anchor2"></i>
@@ -101,7 +103,7 @@
                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, nihil, libero, perspiciatis eos provident laborum eum dignissimos</p>
                               </div>
                            </div>
-                        </div>
+                        </div> --}}
                         <!-- End About item -->
                      </div>
                      <!-- End row -->
@@ -117,11 +119,10 @@
                         </div>
                         <div class="col-md-6">
                            <div class="content-block">
-                              <h2>We’re A Digital Design Agency.</h2>
-                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam tempora itaque, autem dolores culpa cum mollitia voluptate nesciunt voluptatibus quasi.</p>
-                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis eveniet vel et mollitia nemo corporis sed ut, exercitationem incidunt, rerum nam doloremque quos ratione doloribus, officiis adipisci error quasi soluta?</p>
-                              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore, magnam.</p>
-                              <div class="row">
+                              <h2>{{ $about['heading'] }}.</h2>
+                              <p>{{ $about['description'] }}</p>
+                             
+                             {{--  <div class="row">
                                  <div class="col-md-6">
                                     <div class="media">
                                        <div class="pull-left">
@@ -144,7 +145,7 @@
                                        </div>
                                     </div>
                                  </div>
-                              </div>
+                              </div> --}}
                            </div>
                         </div>
                      </div>
@@ -153,7 +154,7 @@
                <!--
                   Start Call To Action
                   ==================================== -->
-               <section class="call-to-action section-sm bg-1 overly">
+              {{--  <section class="call-to-action section-sm bg-1 overly">
                   <div class="container">
                      <div class="row">
                         <div class="col-md-12 text-center">
@@ -165,7 +166,7 @@
                      <!-- End row -->
                   </div>
                   <!-- End container -->
-               </section>
+               </section> --}}
                <!-- End section -->
                <!-- Start Services Section
                   ==================================== -->
@@ -179,70 +180,17 @@
                         </div>
                         <!-- /section title -->
                         <!-- Single Service Item -->
+                        @foreach($services as $service)
                         <article class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms">
                            <div class="service-block text-center">
                               <div class="service-icon text-center">
                                  <i class="tf-globe"></i>
                               </div>
-                              <h3>WordPress Theme</h3>
-                              <p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+                              <h3>{{ $service->title }}</h3>
+                              <p>{{ $service->description }}</p>
                            </div>
                         </article>
-                        <!-- End Single Service Item -->
-                        <!-- Single Service Item -->
-                        <article class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="200ms">
-                           <div class="service-block text-center">
-                              <div class="service-icon text-center">
-                                 <i class="tf-ion-laptop"></i>
-                              </div>
-                              <h3>Responsive Design</h3>
-                              <p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
-                           </div>
-                        </article>
-                        <!-- End Single Service Item -->
-                        <!-- Single Service Item -->
-                        <article class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="400ms">
-                           <div class="service-block text-center">
-                              <div class="service-icon text-center">
-                                 <i class="tf-genius"></i>
-                              </div>
-                              <h3>Media &amp; Advertisement</h3>
-                              <p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
-                           </div>
-                        </article>
-                        <!-- End Single Service Item -->
-                        <!-- Single Service Item -->
-                        <article class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="200ms">
-                           <div class="service-block text-center">
-                              <div class="service-icon text-center">
-                                 <i class="tf-dial"></i>
-                              </div>
-                              <h3>Graphic Design</h3>
-                              <p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
-                           </div>
-                        </article>
-                        <!-- End Single Service Item -->
-                        <!-- Single Service Item -->
-                        <article class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="400ms">
-                           <div class="service-block text-center">
-                              <div class="service-icon text-center">
-                                 <i class="tf-target3"></i>
-                              </div>
-                              <h3>Apps Development</h3>
-                              <p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
-                           </div>
-                        </article>
-                        <!-- End Single Service Item -->
-                        <!-- Single Service Item -->
-                        <article class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
-                           <div class="service-block text-center kill-margin-bottom">
-                              <div class="service-icon text-center">
-                                 <i class="tf-lifesaver"></i>
-                              </div>
-                              <h3>Networking</h3>
-                              <p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
-                           </div>
-                        </article>
+                        @endforeach()
                         <!-- End Single Service Item -->
                      </div>
                      <!-- End row -->
@@ -523,120 +471,39 @@
                         </div>
                         <!-- /section title -->
                         <!-- team member -->
+                        @foreach($users as $user)
                         <div class="col-md-3 col-sm-6 col-xs-12  wow fadeInDown" data-wow-duration="500ms">
+                           
                            <div class="team-member">
                               <div class="member-photo">
                                  <!-- member photo -->
-                                 <img class="img-responsive" src="{{asset('public/frontend_assets/images/team/team-1.jpg')}}" alt="Meghna">
+                                 <img class="img-responsive" src="{{asset('public/storage/profile-pictures/' . $user->profile_pic)}}" alt="Meghna">
                                  <!-- /member photo -->
                                  <!-- member social profile -->
-                                 <div class="mask">
+                                 {{-- <div class="mask">
                                     <ul class="list-inline">
                                        <li><a href="#"><i class="tf-ion-social-facebook"></i></a></li>
                                        <li><a href="#"><i class="tf-ion-social-twitter"></i></a></li>
                                        <li><a href="#"><i class="tf-ion-social-linkedin"></i></a></li>
                                        <li><a href="#"><i class="tf-ion-social-dribbble-outline"></i></a></li>
                                     </ul>
-                                 </div>
+                                 </div> --}}
                                  <!-- /member social profile -->
                               </div>
                               <!-- member name & designation -->
                               <div class="member-meta">
-                                 <h4>Abul Mal Muhit</h4>
-                                 <span>CEO/Founder</span>
-                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur necessitatibus ullam, culpa odio.</p>
+                                 <h4>{{ $user->name }}</h4>
+                                 <span>{{ $user->designation }}</span>
+                                 <p>{{ $user->about }}</p>
                               </div>
                               <!-- /member name & designation -->
                               <!-- /about member -->
                            </div>
                         </div>
+                           @endforeach
                         <!-- end team member -->
                         <!-- team member -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="200ms">
-                           <div class="team-member">
-                              <div class="member-photo">
-                                 <!-- member photo -->
-                                 <img class="img-responsive" src="{{asset('public/frontend_assets/images/team/team-2.jpg')}}" alt="Meghna">
-                                 <!-- /member photo -->
-                                 <!-- member social profile -->
-                                 <div class="mask">
-                                    <ul class="list-inline">
-                                       <li><a href="#"><i class="tf-ion-social-facebook"></i></a></li>
-                                       <li><a href="#"><i class="tf-ion-social-twitter"></i></a></li>
-                                       <li><a href="#"><i class="tf-ion-social-linkedin"></i></a></li>
-                                       <li><a href="#"><i class="tf-ion-social-dribbble-outline"></i></a></li>
-                                    </ul>
-                                 </div>
-                                 <!-- /member social profile -->
-                              </div>
-                              <!-- member name & designation -->
-                              <div class="member-meta">
-                                 <h4>Frank Miller</h4>
-                                 <span>Manager</span>
-                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur necessitatibus ullam, culpa odio.</p>
-                              </div>
-                              <!-- /member name & designation -->
-                              <!-- /about member -->
-                           </div>
-                        </div>
-                        <!-- end team member -->
-                        <!-- team member -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="400ms">
-                           <div class="team-member">
-                              <div class="member-photo">
-                                 <!-- member photo -->
-                                 <img class="img-responsive" src="{{asset('public/frontend_assets/images/team/team-3.jpg')}}" alt="Meghna">
-                                 <!-- /member photo -->
-                                 <!-- member social profile -->
-                                 <div class="mask">
-                                    <ul class="list-inline">
-                                       <li><a href="#"><i class="tf-ion-social-facebook"></i></a></li>
-                                       <li><a href="#"><i class="tf-ion-social-twitter"></i></a></li>
-                                       <li><a href="#"><i class="tf-ion-social-linkedin"></i></a></li>
-                                       <li><a href="#"><i class="tf-ion-social-dribbble-outline"></i></a></li>
-                                    </ul>
-                                 </div>
-                                 <!-- /member social profile -->
-                              </div>
-                              <!-- member name & designation -->
-                              <div class="member-meta">
-                                 <h4>Michael Jonson</h4>
-                                 <span>Web Developer</span>
-                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur necessitatibus ullam, culpa odio.</p>
-                              </div>
-                              <!-- /member name & designation -->
-                              <!-- /about member -->
-                           </div>
-                        </div>
-                        <!-- end team member -->
-                        <!-- team member -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="600ms">
-                           <div class="team-member">
-                              <div class="member-photo">
-                                 <!-- member photo -->
-                                 <img class="img-responsive" src="{{asset('public/frontend_assets/images/team/team-4.jpg')}}" alt="Meghna">
-                                 <!-- /member photo -->
-                                 <!-- member social profile -->
-                                 <div class="mask">
-                                    <ul class="list-inline">
-                                       <li><a href="#"><i class="tf-ion-social-facebook"></i></a></li>
-                                       <li><a href="#"><i class="tf-ion-social-twitter"></i></a></li>
-                                       <li><a href="#"><i class="tf-ion-social-linkedin"></i></a></li>
-                                       <li><a href="#"><i class="tf-ion-social-dribbble-outline"></i></a></li>
-                                    </ul>
-                                 </div>
-                                 <!-- /member social profile -->
-                              </div>
-                              <!-- member name & designation -->
-                              <div class="member-meta">
-                                 <h4>Mo. Kha. Alamgir</h4>
-                                 <span>SEO Specialist</span>
-                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur necessitatibus ullam, culpa odio.</p>
-                              </div>
-                              <!-- /member name & designation -->
-                              <!-- /about member -->
-                           </div>
-                        </div>
+                        
                         <!-- end team member -->
                      </div>
                      <!-- End row -->
@@ -646,7 +513,7 @@
                <!-- End section -->
                <!-- Start Pricing section
                   =========================================== -->
-               <section id="pricing" class="pricing section">
+               {{-- <section id="pricing" class="pricing section">
                   <div class="container">
                      <div class="row">
                         <!-- section title -->
@@ -759,11 +626,11 @@
                      <!-- End row -->
                   </div>
                   <!-- End container -->
-               </section>
+               </section> --}}
                <!-- End section -->
                <!-- Start Testimonial
                   =========================================== -->
-               <section id="testimonial" class="testimonial overly section bg-2">
+             {{--   <section id="testimonial" class="testimonial overly section bg-2">
                   <div class="container">
                      <div class="row">
                         <div class="col-lg-12">
@@ -837,7 +704,7 @@
                      <!-- End row -->
                   </div>
                   <!-- End container -->
-               </section>
+               </section> --}}
                <!-- End Section -->
                <!--
                   Start Blog Section
@@ -847,65 +714,31 @@
                      <div class="row">
                         <!-- section title -->
                         <div class="title text-center wow fadeInDown">
-                           <h2> Latest <span class="color">Posts</span></h2>
+                           <h2> Latest <span class="color">Projects</span></h2>
                            <div class="border"></div>
                         </div>
                         <!-- /section title -->
                         <div class="clearfix">
                            <!-- single blog post -->
-                           <article class="col-md-4 col-sm-6 col-xs-12 clearfix wow fadeInUp" data-wow-duration="500ms">
-                              <div class="post-block">
-                                 <div class="media-wrapper">
-                                    <img src="{{asset('public/frontend_assets/images/blog/blog-post-1.jpg')}}" alt="amazing caves coverimage" class="img-responsive">
-                                 </div>
-                                 <div class="content">
-                                    <h3><a href="">Simple Image Post</a></h3>
-                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non skateboard dolor brunch.</p>
-                                    <a class="btn btn-transparent" href="single-post.html">Read more</a>
-                                 </div>
-                              </div>
-                           </article>
-                           <!-- /single blog post -->
-                           <!-- single blog post -->
-                           <article class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="200ms">
-                              <div class="post-block">
-                                 <div id="gallery-post" class="media-wrapper">
-                                    <div class="item">
-                                       <img src="{{asset('public/frontend_assets/images/blog/blog-post-2.jpg')}}" alt="blog post" class="img-responsive">
+                           @foreach($projects as $project)
+                              <article class="col-md-4 col-sm-6 col-xs-12 clearfix wow fadeInUp" data-wow-duration="500ms">
+                                 <div class="post-block">
+                                    <div class="media-wrapper">
+                                       <img src="{{asset('public/storage/project-images/' . $project->image)}}" alt="amazing caves coverimage" class="img-responsive">
                                     </div>
-                                    <div class="item">
-                                       <img src="{{asset('public/frontend_assets/images/blog/blog-post-3.jpg')}}" alt="blog post" class="img-responsive">
-                                    </div>
-                                    <div class="item">
-                                       <img src="{{asset('public/frontend_assets/images/blog/blog-post-1.jpg')}}" alt="blog post | Meghna" class="img-responsive">
+                                    <div class="content">
+                                       <h3><a href="">{{ $project->title }}</a></h3>
+                                       <p>{{$project->description}}.</p>
+                                       {{-- <a class="btn btn-transparent" href="single-post.html">Read more</a> --}}
                                     </div>
                                  </div>
-                                 <div class="content">
-                                    <h3><a href="">Simple Slider Post</a></h3>
-                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non skateboard dolor brunch.</p>
-                                    <a class="btn btn-transparent" href="single-post.html">Read more</a>
-                                 </div>
-                              </div>
-                           </article>
-                           <!-- end single blog post -->
-                           <!-- single blog post -->
-                           <article class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="400ms">
-                              <div class="post-block">
-                                 <div class="media-wrapper">
-                                    <img src="{{asset('public/frontend_assets/images/blog/blog-post-3.jpg')}}" alt="amazing caves coverimage" class="img-responsive">
-                                 </div>
-                                 <div class="content">
-                                    <h3><a href="">Simple Image Post</a></h3>
-                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non skateboard dolor brunch.</p>
-                                    <a class="btn btn-transparent" href="single-post.html">Read more</a>
-                                 </div>
-                              </div>
-                           </article>
-                           <!-- end single blog post -->
+                              </article>
+                           @endforeach
+                           <!-- /single blog post -->                          
                         </div>
-                        <div class="all-post text-center">
+                        <di{{-- v class="all-post text-center">
                            <a class="btn btn-main" href="#">View All Post</a>
-                        </div>
+                        </div> --}}
                      </div>
                      <!-- end row -->
                   </div>
@@ -949,7 +782,8 @@
                         <!-- / End Contact Details -->
                         <!-- Contact Form -->
                         <div class="contact-form col-md-6 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
-                           <form id="contact-form" method="post" action="sendmail.php" role="form">
+                           <form id="contact-form" method="post" action="{{ route('contact_post') }}" role="form">
+                              {{ csrf_field() }}
                               <div class="form-group">
                                  <input type="text" placeholder="Your Name" class="form-control" name="name" id="name">
                               </div>
@@ -957,10 +791,10 @@
                                  <input type="email" placeholder="Your Email" class="form-control" name="email" id="email">
                               </div>
                               <div class="form-group">
-                                 <input type="text" placeholder="Subject" class="form-control" name="subject" id="subject">
+                                 <input type="text" placeholder="Subject" class="form-control" name="contact_subject" id="subject">
                               </div>
                               <div class="form-group">
-                                 <textarea rows="6" placeholder="Message" class="form-control" name="message" id="message"></textarea>	
+                                 <textarea rows="6" placeholder="Message" class="form-control" name="contact_message" id="message_contact"></textarea>	
                               </div>
                               <div id="mail-success" class="success">
                                  Thank you. The Mailman is on His Way :)

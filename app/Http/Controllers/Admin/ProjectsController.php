@@ -82,14 +82,7 @@ class ProjectsController extends Controller
         return \Response()->json(['error' => "Image uploading failed", 'code' => 202]);
         }
     }
-     public function UploadImage($type, $file){
-        if( $type == 'image'){
-        $path = 'public/storage/project-images/';
-        }
-        $filename = md5($file->getClientOriginalName() . time()) . '.' . $file->getClientOriginalExtension();
-        $file->move( $path , $filename);
-        return $filename;
-    }
+     
 
     /**
      * Display the specified resource.
@@ -137,24 +130,38 @@ class ProjectsController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            $p =  Product::find($id);
-            $p->name = $request->name;
-            $p->price = $request->price;           
-            $p->category_id = $request->category_id;           
+            $p =  Project::find($id);
+            $p->title = $request->title;
+            $p->description = $request->description;  
+            if ($request->hasFile('image')) {
+              $image=$request->file('image');
+              $filename=time() . '.' . $image->getClientOriginalExtension();
+              $location=public_path('public/storage/project-images/'.$filename);
+              $p->image=$filename;
+              $p->image = $this->UploadImage('image', Input::file('image'));
+            }         
             if ($p->save()) {
-            $this->set_session('Product Successfully Updated.', true);
-            return redirect()->route('products');
+            $this->set_session('Project Successfully Updated.', true);
+            return redirect()->route('projects');
             }else{
-                $this->set_session('Product Could Not be Updated.', false);
-            return redirect()->route('products');
+                $this->set_session('Project Could Not be Updated.', false);
+            return redirect()->route('projects');
             }
 
         }catch(\Exception $e){
             $this->set_session('Something Went Wrong Please Try Again '.$e->getMessage(), false);
-            return redirect()->route('products'); 
+            return redirect()->route('projects'); 
         }
     }
 
+    public function UploadImage($type, $file){
+        if( $type == 'image'){
+        $path = 'public/storage/project-images/';
+        }
+        $filename = md5($file->getClientOriginalName() . time()) . '.' . $file->getClientOriginalExtension();
+        $file->move( $path , $filename);
+        return $filename;
+    }
     /**
      * Remove the specified resource from storage.
      *
