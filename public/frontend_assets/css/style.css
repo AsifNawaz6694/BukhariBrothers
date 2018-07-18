@@ -2089,3 +2089,22 @@ blockquote {
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+.member-photo img {
+    transition: all 0.4s ease 0s;
+    max-height: 265px;
+    width: 100%;
+}
+.portfolio-block:hover:before {
+    opacity: 1;
+}
+.portfolio-block:before {
+    transition: all 0.3s ease-in-out;
+    background: white;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0px;
+    position: absolute;
+    content: '';
+}

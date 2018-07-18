@@ -406,7 +406,7 @@
                               <!-- /about member -->
                            </div>
                         </div>
-                        @endforeach
+                           @endforeach
                         <!-- end team member -->
                         <!-- team member -->
                         
