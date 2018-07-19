@@ -14,6 +14,7 @@ use App\User;
 use App\Service;
 use App\Project;
 use App\Contact;
+use App\Career;
 use App\Resource;
 use App\About;
 class FrontController extends Controller
@@ -39,7 +40,10 @@ class FrontController extends Controller
         $args['services'] = Service::get();            
         $args['projects'] = Project::get();            
         $args['resources'] = Resource::get();            
-        $args['about'] = About::first();            
+        $args['about'] = About::first(); 
+        $args['services_count'] = Service::count();           
+        $args['users_count'] = User::count();           
+        $args['resources_count'] = Resource::count();           
         return view('front.index')->with($args);
     }
 
@@ -79,6 +83,56 @@ class FrontController extends Controller
         $this->set_session('Something Went Wrong Please Try Again Later', false);
         return redirect()->back();
       }       
+    }
+
+    public function career_form(Request $request)
+    {
+    try {
+       if (isset($request->email)){
+            if (isset($request->name)){
+            $data['name'] = $request->name;
+            }
+            if (isset($request->email)) {
+            $data['email'] = $request->email;
+            }
+                       
+            if (isset($request->position)) {
+            $data['position'] = $request->position;
+            }      
+          Mail::send('emails.career_email',['data'=>$data] , function ($message) use($data){
+              $message->from($data['email'], 'Career Email - BukhariBrothers');
+              $message->to(env('MAIL_USERNAME'))->subject('BukhariBrothers - Career Email');
+            });  
+            $store = new Career;
+            $store->name = $request->name;       
+            $store->email = $request->email;       
+            $store->position = $request->position;       
+             // dd($request->hasFile('resume'));
+            if ($request->hasFile('resume')) {              
+              $image=$request->file('resume');
+              $filename=time() . '.' . $image->getClientOriginalExtension();
+              $location=public_path('public/storage/career-resume/'.$filename);
+              $store->cv=$filename;
+              $store->cv = $this->UploadImage('resume', Input::file('resume'));
+            }            
+            $store->save();
+            $this->set_session('Thank You For Your Valuable Time, We will be right back to you soon', true);
+            return redirect()->back();
+         }else{
+            $this->set_session('Something Went Wrong Please Try Again Later', false);
+            return redirect()->back();
+         }  
+      } catch (QueryException $e) {
+        $this->set_session('Something Went Wrong Please Try Again Later', false);
+        return redirect()->back();
+      }       
     }        
-    
+     public function UploadImage($type, $file){
+        if( $type == 'resume'){
+        $path = 'public/storage/career-cv/';
+        }
+        $filename = md5($file->getClientOriginalName() . time()) . '.' . $file->getClientOriginalExtension();
+        $file->move( $path , $filename);
+        return $filename;
+    }
 }

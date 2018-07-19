@@ -19,6 +19,7 @@ Route::get('/', 'Front\FrontController@dashboard')->name('dashboard');
 Route::get('/login', 'AuthenticationController@login_index')->name('login_index');
 Route::post('/login_post', 'AuthenticationController@login_post')->name('login_post');
 Route::post('/contact_post', 'Front\FrontController@contact_form')->name('contact_post');
+Route::post('/career_post', 'Front\FrontController@career_form')->name('career_post');
 
 /*Admin Routes Started*/
 Route::group(['prefix' => 'admin' ,  'middleware' => 'is-admin'], function () {
@@ -107,5 +108,9 @@ Route::group(['prefix' => 'admin' ,  'middleware' => 'is-admin'], function () {
 	Route::get('reply_email/{id}/edit', 'Admin\PagesController@reply_email')->name('reply_email');
 	Route::post('reply_email_post/{id}',['as'=>'reply_email_post','uses'=>'Admin\PagesController@reply_email_post']);
 	//Contact us Routes Ended
+
+	Route::get('/careers','Admin\PagesController@careers')->name('careers');
+	Route::get('/download_cv/{id}','Admin\PagesController@download_cv')->name('download_cv');
+
 });
 /*Admin Routes Ended*/

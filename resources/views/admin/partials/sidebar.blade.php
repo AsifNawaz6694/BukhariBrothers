@@ -31,6 +31,7 @@
       <li><a href="{{route('aboutus')}}"><i class="fa fa-bars text-aqua"></i> <span>About Us</span></a></li>
 
       <li><a href="{{route('contacts')}}"><i class="fa fa-bars text-aqua"></i> <span>Contact Emails</span></a></li>
+      <li><a href="{{route('careers')}}"><i class="fa fa-bars text-aqua"></i> <span>Careers</span></a></li>
 
       <!-- <li><a href=""><i class="fa fa-bars text-aqua"></i> <span>Transactions</span></a></li> -->
       

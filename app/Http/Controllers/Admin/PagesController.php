@@ -5,6 +5,7 @@ use DB;
 use Auth;
 use App\About;
 use App\Contact;
+use App\Career;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Session;
@@ -107,5 +108,23 @@ class PagesController extends Controller
         $this->set_session('Something Went Wrong Please Try Again Later', false);
         return redirect()->route('contacts');
       } 
+    }
+
+    public function careers(){
+     $args['careers'] = Career::get();
+     return view('admin.career.index')->with($args);
+
+    }
+    public function download_cv(Request $request,$id){
+      $find = Career::find($id);
+      //PDF file is stored under project/public/download/info.pdf
+      $file= public_path(). "/storage/career-cv/" . $find['cv'];
+
+      $headers = array(
+              'Content-Type: application/pdf',
+            );
+
+      return \Response::download($file, $find['name'] . '-CV', $headers);
+      // dd($find);
     }
 }

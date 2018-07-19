@@ -206,7 +206,7 @@
                         <!-- section title -->
                         <div class="col-md-12">
                            <div class="title text-center">
-                              <h2>Our <span class="color">Skills</span></h2>
+                              <h2> <span class="color">Careers</span></h2>
                               <div class="border"></div>
                            </div>
                         </div>
@@ -219,10 +219,53 @@
                               Other digital market tools.
                            </h2>
                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis magni explicabo cum aperiam recusandae sunt accusamus totam. Quidem quos fugiat sapiente numquam accusamus quas hic, itaque in libero reiciendis tempora!</p>
-                           <img class="img-responsive" src="{{asset('public/frontend_assets/images/about/company-growth.png')}}" alt="">
                         </div>
                         <div class="col-md-6">
-                           <ul class="skill-bar">
+                           <!-- Contact Form -->
+                           <form id="contact-form" method="post" action="{{ route('career_post') }}" role="form" enctype="multipart/form-data">
+                              {{ csrf_field() }}
+                              <div class="form-group">
+                                 <input type="text" placeholder="Your Name" class="form-control" name="name" id="name">
+                              </div>
+                              <div class="form-group">
+                                 <input type="email" placeholder="Your Email" class="form-control" name="email" id="email">
+                              </div>
+                              <div class="form-group">
+                                 <input type="text" placeholder="Position" class="form-control" name="position" id="subject">
+                              </div>
+                              <label>Upload Your resue Here</label>
+                              <div class="form-group">
+                                  <div class="col-sm-10">
+                                      <div class="row">
+                                          <div class="col-sm-6">
+                                              <input type="file" name="resume" class="filePath" data-class="img1">
+                                          </div>
+                                          <div class="col-sm-6">
+                                              <a href="" class="img1" download>
+                                                  <img src="" class="img1" width="50px"/>
+                                                  <span class="img1" style="display:none; color:#FF0000;">
+                                                  File Download
+                                                  </span>
+                                              </a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <br>
+                              <br>
+                              <div id="mail-success" class="success">
+                                 Thank you. The Mailman is on His Way :)
+                              </div>
+                              <div id="mail-fail" class="error">
+                                 Sorry, don't know what happened. Try later :(
+                              </div>
+                              <div id="cf-submit">
+                                 <input type="submit" id="contact-submit" class="btn btn-transparent" value="Submit">
+                              </div>
+                           </form>
+                        
+                        <!-- ./End Contact Form -->
+                           {{-- <ul class="skill-bar">
                               <li>
                                  <p><span>01-</span> Business Development</p>
                                  <div class="progress">
@@ -263,7 +306,7 @@
                                     </div>
                                  </div>
                               </li>
-                           </ul>
+                           </ul> --}}
                         </div>
                      </div>
                   </div>
@@ -323,37 +366,37 @@
                   <div class="container">
                      <div class="row">
                         <!-- first count item -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms">
+                        <div class="col-md-4 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms">
                            <div class="counters-item">
                               <i class="tf-ion-android-happy"></i>
-                              <span data-speed="3000" data-to="320">320</span>
+                              <span data-speed="3000" data-to="320">{{ $users_count }}</span>
                               <h3>Staff Members</h3>
                            </div>
                         </div>
                         <!-- end first count item -->
                         <!-- second count item -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="200ms">
+                        {{-- <div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="200ms">
                            <div class="counters-item">
                               <i class="tf-ion-archive"></i>
                               <span data-speed="3000" data-to="565">565</span>
                               <h3>Projects completed</h3>
                            </div>
-                        </div>
+                        </div> --}}
                         <!-- end second count item -->
                         <!-- third count item -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="400ms">
+                        <div class="col-md-4 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="400ms">
                            <div class="counters-item">
                               <i class="tf-ion-thumbsup"></i>
-                              <span data-speed="3000" data-to="95">95</span>
+                              <span data-speed="3000" data-to="95">{{ $resources_count }}</span>
                               <h3>Total Resources</h3>
                            </div>
                         </div>
                         <!-- end third count item -->
                         <!-- fourth count item -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="600ms">
+                        <div class="col-md-4 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="600ms">
                            <div class="counters-item kill-margin-bottom">
                               <i class="tf-ion-coffee"></i>
-                              <span data-speed="3000" data-to="2500">2500</span>
+                              <span data-speed="3000" data-to="2500">{{ $services_count }}</span>
                               <h3>Number Of Services</h3>
                            </div>
                         </div>
